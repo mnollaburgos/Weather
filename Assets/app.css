@@ -1,0 +1,8 @@
+li::marker {
+	color: white !important;
+}
+
+.list-group {
+	flex-direction: row !important;
+	padding-right: 0 !important;
+}

@@ -6,7 +6,7 @@ $("#submit").on("click", function(){
   $("#cardForecast").addClass("card");
   $("ul").addClass("list-group list-group-flush");
   $("li").addClass("list-group-item");
-  //pushing cityname through the APIs
+  //pushing cityname through the api call
   weatherData(cityName);
   fiveDay(cityName);
 })
@@ -95,4 +95,6 @@ $("#day5").append(`<li>Temperature: ${forecastData.list[4].main.temp}<li>`);
 
 }
 
+
+//remove list class until onclick
 
