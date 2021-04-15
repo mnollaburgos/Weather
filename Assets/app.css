@@ -1,8 +1,9 @@
 li::marker {
 	color: white !important;
 }
-
+/*Overwriting some Bootstrap*/
 .list-group {
 	flex-direction: row !important;
 	padding-right: 0 !important;
+	align-self: center !important;
 }
