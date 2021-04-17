@@ -1,9 +1,23 @@
+body {
+	background-color: #cfe2ff;
+}
+#cardForecast {
+	background-color: #cfe2ff;
+}
+#currentWeather {
+	background-color: #cfe2ff;
+}
 li::marker {
-	color: white !important;
+	color: #cfe2ff !important;
 }
 /*Overwriting some Bootstrap*/
 .list-group {
 	flex-direction: row !important;
 	padding-right: 0 !important;
 	align-self: center !important;
+	font-style: black !important;
+}
+
+.list-group-item-primary {
+	color: black !important;
 }

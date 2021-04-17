@@ -2,10 +2,12 @@
 //Onclick function for searchbar
 $("#submit").on("click", function(){
   let cityName = $("#city-name").val();
+//set name to local storage
+  localStorage.setItem(cityName);
 //adding bootstrap classes for styling 
   $("#cardForecast").addClass("card");
   $("ul").addClass("list-group list-group-flush");
-  $("li").addClass("list-group-item");
+  $("li").addClass("list-group-item list-group-item-primary");
   //pushing cityname through the api call
   weatherData(cityName);
   fiveDay(cityName);
@@ -19,7 +21,6 @@ function weatherData(city){
   }).then(function(response) {
     console.log(response);
     updateWeather(response);
-
   });
 }
 
@@ -35,7 +36,9 @@ function updateWeather(currentWeather){
   $("#currentWeather").append(`<p>Humidity: ${currentWeather.main.humidity}%<p>`);
 
   //apppend temperature to our CurrentWeahter Div
-  $("#currentWeather").append(`<p>Temperature: ${currentWeather.main.temp}<p>`);
+  let tempK = currentWeather.main.temp;
+  let tempF = Math.floor((tempK -273.15) * 1.80 + 32);
+  $("#currentWeather").append(`<p>Temperature: ${tempF}F<p>`);
 
   //append wind speed to currentWeather
   $("#currentWeather").append(`<p>Wind Speed: ${currentWeather.wind.speed}<p>`);
@@ -65,36 +68,43 @@ $("#day1").append(`<li>Date: ${forecastData.list[0].dt_txt}<li>`);
 //append an icon representation of weather conditions
 
 //append the temperature
-$("#day1").append(`<li>Temperature: ${forecastData.list[0].main.temp}<li>`);
+let tempK1 = forecastData.list[0].main.temp;
+let tempF1 = Math.floor((tempK1 - 273.15) * 1.80 + 32);   
+$("#day1").append(`<li>Temperature: ${tempF1}<li>`);
 
 //append and the humidity
 $("#day1").append(`<li>Humidity: ${forecastData.list[0].main.humidity}%<li>`);
 
 //now for day2
+let tempK2 = forecastData.list[1].main.temp;
+let tempF2 = Math.floor((tempK2 - 273.15) * 1.80 + 32);  
 $("#day2").append(`<li>Date: ${forecastData.list[1].dt_txt}<li>`);
 $("#day2").append(`<li>Humidity: ${forecastData.list[1].main.humidity}%<li>`);
-$("#day2").append(`<li>Temperature: ${forecastData.list[1].main.temp}<li>`);
+$("#day2").append(`<li>Temperature: ${tempF2}<li>`);
 
 //day3
-
+let tempK3 = forecastData.list[2].main.temp;
+let tempF3 = Math.floor((tempK3 - 273.15) * 1.80 + 32 );  
 $("#day3").append(`<li>Date: ${forecastData.list[2].dt_txt}<li>`);
 $("#day3").append(`<li>Humidity: ${forecastData.list[2].main.humidity}%<li>`);
-$("#day3").append(`<li>Temperature: ${forecastData.list[2].main.temp}<li>`);
+$("#day3").append(`<li>Temperature: ${tempF3}<li>`);
 
 //day4
-
+let tempK4 = forecastData.list[3].main.temp;
+let tempF4 = Math.floor((tempK4 - 273.15) * 1.80 + 32 );  
 $("#day4").append(`<li>Date: ${forecastData.list[3].dt_txt}<li>`);
 $("#day4").append(`<li>Humidity: ${forecastData.list[3].main.humidity}%<li>`);
-$("#day4").append(`<li>Temperature: ${forecastData.list[3].main.temp}<li>`);
+$("#day4").append(`<li>Temperature: ${tempF4}<li>`);
 
 //day5
-
+let tempK5 = forecastData.list[4].main.temp;
+let tempF5 = Math.floor((tempK5 - 273.15) * 1.80 + 32 );  
 $("#day5").append(`<li>Date: ${forecastData.list[4].dt_txt}<li>`);
 $("#day5").append(`<li>Humidity: ${forecastData.list[4].main.humidity}%<li>`);
-$("#day5").append(`<li>Temperature: ${forecastData.list[4].main.temp}<li>`);
+$("#day5").append(`<li>Temperature: ${tempF5}<li>`);
 
 }
 
 
-//remove list class until onclick
+
 
