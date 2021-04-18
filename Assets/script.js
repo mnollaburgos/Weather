@@ -3,7 +3,7 @@
 $("#submit").on("click", function(){
   let cityName = $("#city-name").val();
 //set name to local storage
-  localStorage.setItem(cityName);
+  localStorage.setItem(cityName, 'cities');
 //adding bootstrap classes for styling 
   $("#cardForecast").addClass("card");
   $("ul").addClass("list-group list-group-flush");
@@ -11,8 +11,14 @@ $("#submit").on("click", function(){
   //pushing cityname through the api call
   weatherData(cityName);
   fiveDay(cityName);
+  getCities(cityName);
 })
 
+//Function to append our local storage to a list for them to search through
+function getCities() {
+  var searchedCities = localStorage.getItem('cities');
+  $(".city").append(`<p> ${searchedCities} <p>`);
+}
 //API call for current weather data
 function weatherData(city){
   $.ajax({
