@@ -3,7 +3,7 @@
 $("#submit").on("click", function(){
   let cityName = $("#city-name").val();
 //set name to local storage
-  localStorage.setItem(cityName, 'cities');
+  localStorage.setItem('cities', cityName);
 //adding bootstrap classes for styling 
   $("#cardForecast").addClass("card");
   $("ul").addClass("list-group list-group-flush");
@@ -11,13 +11,13 @@ $("#submit").on("click", function(){
   //pushing cityname through the api call
   weatherData(cityName);
   fiveDay(cityName);
-  getCities(cityName);
+  getCities();
 })
 
 //Function to append our local storage to a list for them to search through
 function getCities() {
   var searchedCities = localStorage.getItem('cities');
-  $(".city").append(`<p> ${searchedCities} <p>`);
+  $(".city").append(`<li> ${searchedCities} <li>`);
 }
 //API call for current weather data
 function weatherData(city){
@@ -27,6 +27,20 @@ function weatherData(city){
   }).then(function(response) {
     console.log(response);
     updateWeather(response);
+    uvIndex(response.coord.lat, response.coord.lon);
+  });
+}
+
+function uvIndex(lat, lon){
+  $.ajax({
+    url:"http://api.openweathermap.org/data/2.5/uvi?lat="+lat+"&lon="+lon+"&appid=4990a0ba671639637ded74843defb334",
+    method: "GET"
+  }).then(function(response) {
+    console.log(response);
+    var p = $("<p>");
+    p.text("UV Index: "+response.value);
+    $("#currentWeather").append(p);
+   // updateWeather(response);
   });
 }
 
@@ -60,6 +74,7 @@ function fiveDay(city){
     method: "GET"
   }).then(function(response) {
     console.log(response);
+
     updateForecast(response);
   });
 
